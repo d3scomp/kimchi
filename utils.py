@@ -262,12 +262,15 @@ def get_next_clone_name(all_names, basename, name_suffix='', ts=False):
 
 
 def is_libvirtd_up():
-    """
-    Checks if libvirtd.service is up.
-    """
-    cmd = ['systemctl', 'is-active', 'libvirtd.service']
-    output, error, rc = run_command(cmd, silent=True)
-    return True if output == 'active\n' else False
+    # HACK TO SPEED-UP VM LISTING
+    return True
+
+#    """
+#    Checks if libvirtd.service is up.
+#    """
+#    cmd = ['systemctl', 'is-active', 'libvirtd.service']
+#    output, error, rc = run_command(cmd, silent=True)
+#    return True if output == 'active\n' else False
 
 
 def is_s390x():
