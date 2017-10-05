@@ -1288,15 +1288,18 @@ class VMModel(object):
         graphics = self.get_graphics(name, self.conn)
         graphics_port = graphics[2]
         graphics_port = graphics_port if state == 'running' else None
-        try:
-            if state == 'running' and self._has_video(dom):
-                screenshot = self.vmscreenshot.lookup(name)
-            elif state == 'shutoff':
-                # reset vm stats when it is powered off to avoid sending
-                # incorrect (old) data
-                self.stats[dom.UUIDString()] = {}
-        except NotFoundError:
-            pass
+        
+
+# HACK: DISABLE SCREENSHOTS IN ORDER TO SPEED-UP
+#        try:
+#            if state == 'running' and self._has_video(dom):
+#                screenshot = self.vmscreenshot.lookup(name)
+#            elif state == 'shutoff':
+#                # reset vm stats when it is powered off to avoid sending
+#                # incorrect (old) data
+#                self.stats[dom.UUIDString()] = {}
+#        except NotFoundError:
+#            pass
 
         with self.objstore as session:
             try:
